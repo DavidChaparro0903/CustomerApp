@@ -1,0 +1,27 @@
+package com.david.Customer.Implementation;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.david.Customer.Entity.Customer;
+import com.david.Customer.Repository.CustomerRepository;
+
+public class CustomerImplementation {
+	
+	
+	@Autowired
+	private CustomerRepository customer;
+	
+	
+	
+	public void addCustomer(Customer customerex) {
+		this.customer.save(customerex);
+	}
+	
+	
+	public List<Customer> getListCustomer(){
+		return this.customer.findAll();
+	}
+
+}

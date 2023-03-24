@@ -1,0 +1,84 @@
+package com.david.Customer.Controllers;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.david.Customer.Entity.Customer;
+import com.david.Customer.Implementation.CustomerImplementation;
+import com.david.Customer.Repository.ICustomer;
+
+@RestController
+@RequestMapping("/customer")
+public class ControllerCustomer {
+
+	
+	@Autowired
+	private CustomerImplementation customer;
+	
+	@GetMapping()
+	public List<Customer> getListCustomer(){
+		return customer.getListCustomer();
+	}
+	
+	
+	@PostMapping()
+	public void addCustomer(@RequestBody Customer customerAdd) {
+		customer.addCustomer(customerAdd);
+	}
+	
+	 @GetMapping("/{id}")
+	 public Customer get(@PathVariable String id){
+	      return customer.getById(Long.parseLong(id));
+	  }
+	 
+   @PutMapping("/{id}")
+   public ResponseEntity<?> put(@PathVariable String id, @RequestBody Customer input){
+       Customer save = customer.getById(Long.parseLong(id));
+       return ResponseEntity.ok(save);
+   }
+	
+	
+//	@Autowired
+//    CustomerRepository customerRepository;
+//
+//    @GetMapping
+//    public List<Customer> findAll(){
+//        return customerRepository.findAll();
+//    }
+//
+
+//
+
+//
+//    @PostMapping("/{id}")
+//    public  ResponseEntity<?> post(@RequestBody Customer input){
+//        Customer save = customerRepository.save(input);
+//        return ResponseEntity.ok(save);
+//    }
+//
+//    @DeleteMapping("/{id}")
+//    public ResponseEntity<?> delete(@PathVariable String id){
+//        return null;
+//    }
+//
+//	
+	
+	
+	
+//	@GetMapping({"/{id}"})
+//	public Optional<Customer> getCustomer(@PathVariable Long id){
+//		Optional<Customer> aux = customer.findById(id);
+//		return aux;
+//	}
+	
+	
+	
+}
